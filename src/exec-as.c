@@ -27,12 +27,12 @@ int main(int argc, char** argv)
   
   if (argc < 3)
     {
-      fprintf(stderr, "%s: %s", execname,
+      fprintf(stderr, "%s: %s", argc ? argv[0] : "exec-as",
 	      "Too few arguments, you need atleast "
 	      "the file to run and its argv[0].");
       goto fail;
     }
-
+  
   execname = argv[0];
   file = argv[1];
   
