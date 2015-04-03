@@ -1,0 +1,12 @@
+A command that lets you start another command with any argv[0].
+
+
+`exec-as bash -bash` will run the first program in $PATH
+named bash, and set argv[0] to -bash (making it a login
+shell.) You can add addition argument as needed.
+
+
+Note that to actually exec rather than then fork–exec:ing
+you need to type `exec exec-as` instead of `exec-as`, as
+the shell would otherwise fork first.
+
