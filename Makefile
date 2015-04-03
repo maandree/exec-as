@@ -43,10 +43,17 @@ WARN = -Wall -Wextra -Wdouble-promotion -Wformat=2 -Winit-self -Wmissing-include
 STD = c99
 
 
+
 # Build rules
 
+.PHONY: default
+default: command
+
 .PHONY: all
-all: bin/exec-as
+all: command
+
+.PHONY: command
+command: bin/exec-as
 
 
 bin/exec-as: obj/exec-as.o
@@ -56,6 +63,38 @@ bin/exec-as: obj/exec-as.o
 obj/%.o: src/%.c
 	@mkdir -p obj
 	$(CC) -std=$(STD) $(WARN) $(OPTIMISE) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
+
+
+
+# Install rules
+
+.PHONY: install
+install: install-base
+
+.PHONY: install-base
+install-base: install-command install-license
+
+.PHONY: install-command
+install-command: bin/exec-as
+	install -dm755            -- "$(DESTDIR)$(BINDIR)"
+	install -m755 bin/exec-as -- "$(DESTDIR)$(BINDIR)/$(COMMAND)"
+
+.PHONY: install-license
+install-license: COPYING LICENSE
+	install -dm755   -- "$(DESTDIR)$(LICENSEDIR)/$(PKGNAME)"
+	install -m644 $^ -- "$(DESTDIR)$(LICENSEDIR)/$(PKGNAME)"
+
+
+
+# Uninstall rules
+
+.PHONY: uninstall
+uninstall:
+	-rm -- "$(DESTDIR)$(BINDIR)/$(COMMAND)"
+	-rm -- "$(DESTDIR)$(LICENSEDIR)/$(PKGNAME)/COPYING"
+	-rm -- "$(DESTDIR)$(LICENSEDIR)/$(PKGNAME)/LICENSE"
+	-rmdir -- "$(DESTDIR)$(LICENSEDIR)/$(PKGNAME)"
+
 
 
 # Clean rules
