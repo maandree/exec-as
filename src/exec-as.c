@@ -28,7 +28,7 @@ int main(int argc, char** argv)
   if (argc < 3)
     {
       fprintf(stderr, "%s: %s", argc ? argv[0] : "exec-as",
-	      "Too few arguments, you need atleast "
+	      "Too few arguments, you need at least "
 	      "the file to run and its argv[0].");
       goto fail;
     }
