@@ -5,29 +5,33 @@
 
 
 # The package path prefix, if you want to install to another root, set DESTDIR to that root
-PREFIX ?= /usr
+PREFIX = /usr
 # The command path excluding prefix
-BIN ?= /bin
+BIN = /bin
 # The resource path excluding prefix
-DATA ?= /share
+DATA = /share
 # The command path including prefix
-BINDIR ?= $(PREFIX)$(BIN)
+BINDIR = $(PREFIX)$(BIN)
 # The resource path including prefix
-DATADIR ?= $(PREFIX)$(DATA)
+DATADIR = $(PREFIX)$(DATA)
 # The generic documentation path including prefix
-DOCDIR ?= $(DATADIR)/doc
+DOCDIR = $(DATADIR)/doc
 # The info manual documentation path including prefix
-INFODIR ?= $(DATADIR)/info
+INFODIR = $(DATADIR)/info
+# The man page documentation path including prefix
+MANDIR = $(DATADIR)/man
+# The man page section 1 path including prefix
+MAN1DIR = $(MANDIR)/man1
 # The license base path including prefix
-LICENSEDIR ?= $(DATADIR)/licenses
+LICENSEDIR = $(DATADIR)/licenses
 
 # The name of the command as it should be installed
-COMMAND ?= exec-as
+COMMAND = exec-as
 # The name of the package as it should be installed
-PKGNAME ?= exec-as
+PKGNAME = exec-as
 
 # Optimisation settings for C code compilation
-OPTIMISE ?= -Og -g
+OPTIMISE = -Og -g
 # Warnings settings for C code compilation
 WARN = -Wall -Wextra -Wdouble-promotion -Wformat=2 -Winit-self -Wmissing-include-dirs            \
        -Wtrampolines -Wfloat-equal -Wshadow -Wmissing-prototypes -Wmissing-declarations          \
@@ -55,14 +59,13 @@ all: command
 .PHONY: command
 command: bin/exec-as
 
-
 bin/exec-as: obj/exec-as.o
 	@mkdir -p bin
-	$(CC) $(WARN) $(OPTIMISE) $(LDFLAGS) -o $@ $^
+	$(CC) $(WARN) $(OPTIMISE) -o $@ $^ $(LDFLAGS)
 
 obj/%.o: src/%.c
 	@mkdir -p obj
-	$(CC) -std=$(STD) $(WARN) $(OPTIMISE) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
+	$(CC) -std=$(STD) $(WARN) $(OPTIMISE) -c -o $@ $< $(CFLAGS) $(CPPFLAGS)
 
 
 
@@ -71,18 +74,29 @@ obj/%.o: src/%.c
 .PHONY: install
 install: install-base
 
+.PHONY: install-all
+install-all: install-base
+
 .PHONY: install-base
-install-base: install-command install-license
+install-base: install-command install-copyright
 
 .PHONY: install-command
 install-command: bin/exec-as
 	install -dm755            -- "$(DESTDIR)$(BINDIR)"
 	install -m755 bin/exec-as -- "$(DESTDIR)$(BINDIR)/$(COMMAND)"
 
+.PHONY: install-copyright
+install-copyright: install-copying install-license
+
+.PHONY: install-copying
+install-copying:
+	install -dm755        -- "$(DESTDIR)$(LICENSEDIR)/$(PKGNAME)"
+	install -m644 COPYING -- "$(DESTDIR)$(LICENSEDIR)/$(PKGNAME)"
+
 .PHONY: install-license
-install-license: COPYING LICENSE
-	install -dm755   -- "$(DESTDIR)$(LICENSEDIR)/$(PKGNAME)"
-	install -m644 $^ -- "$(DESTDIR)$(LICENSEDIR)/$(PKGNAME)"
+install-license:
+	install -dm755        -- "$(DESTDIR)$(LICENSEDIR)/$(PKGNAME)"
+	install -m644 LICENSE -- "$(DESTDIR)$(LICENSEDIR)/$(PKGNAME)"
 
 
 
