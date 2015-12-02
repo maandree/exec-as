@@ -1,15 +1,20 @@
 _/
-bin/
-obj/
+/bin/
+/obj/
 \#*\#
 .*
 !.git*
 *~
 *.bak
+*.new
 *.swo
 *.swp
 *.out
 *.o
 *.su
 *.gch
+*.info
+*.pdf
+*.dvi
+*.ps
 
