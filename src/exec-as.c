@@ -33,9 +33,10 @@ int main(int argc, char** argv)
     }
   
   execname = argv[0];
+  file = argv[1];
   
-  for (i = 0; i < argc - 1; i++)
-    argv[i] = argv[i + 12];
+  for (i = 0; i < argc - 2; i++)
+    argv[i] = argv[i + 2];
   argv[i] = NULL;
   
   execvp(file, argv);
