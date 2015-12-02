@@ -1,12 +1,29 @@
-A command that lets you start another command with any argv[0].
+NAME
+	exec-as - exec(1) with explicit argv[0]
 
+SYNOPSIS
+	exec-as FILE ARGV0 [ARGV]...
 
-`exec-as bash -bash` will run the first program in $PATH
-named bash, and set argv[0] to -bash (making it a login
-shell.) You can add addition argument as needed.
+DESCRIPTION
+	exec-as shall spawn the program FILE, using execvp(3),
+	using ARGV0 as the value for argv[0], and the following
+	arguments for the following values in argv.
 
+NOTES
+	At least two arguments is required. Since this is not
+	a builtin function, it cannot be used as exec(1) without
+	arguments to set file descriptors.
 
-Note that to actually exec rather than then fork–exec:ing
-you need to type `exec exec-as` instead of `exec-as`, as
-the shell would otherwise fork first.
+	Because this is not a builtin function, running this
+	program would normally do an fork–exec rather than
+	just an exec. To just perform an exec, you need to
+	use exec(1) too: exec exec-as
+
+EXAMPLES
+	'exec-as bash -bash' will run the first program in
+	$PATH named bash, and set argv[0] to -bash (making it
+	a login shell.) You can add addition argument as needed.
+
+SEE ALSO
+	exec(1), exec(3)
 
