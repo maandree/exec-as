@@ -1,0 +1,61 @@
+.TH EXEC-AS 1 EXEC-AS
+.SH NAME
+exec-as - passphrase strength evaluator
+.SH SYNOPSIS
+.B exec-as
+.I FILE
+.I ARGV0
+.RI [ ARGV ]...
+.SH DESCRIPTION
+.B exec-as
+shall spawn the program
+.IR FILE ,
+using
+.BR execvp (3),
+using
+.I ARGV0
+as the value for
+.BR argv[0] ,
+and the following arguments for the following values in
+.BR argv .
+.SH NOTES
+At least two arguments is required. Since this is not
+a builtin function, it cannot be used as
+.BR exec (1)
+without arguments to set file descriptors.
+.PP
+Because this is not a builtin function, running this
+program would normally do an fork–exec rather than
+just an exec. To just perform an exec, you need to
+use
+.BR exec (1)
+too:
+.B exec exec-as
+.SH EXAMPLES
+.B exec-as bash -bash
+will run the first program in
+.B $PATH
+named
+.BR bash ,
+and set
+.B argv[0]
+to
+.B \-bash
+(making it a login shell.) You can add addition argument as needed.
+.SH "SEE ALSO"
+.BR exec (1),
+.BR exec (3)
+.SH AUTHORS
+Principal author, Mattias Andrée.  See the COPYING file for the full
+list of authors.
+.SH LICENSE
+Copyright \(co 2015  Mattias Andrée
+.br
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
+.br
+This is free software: you are free to change and redistribute it.
+.br
+There is NO WARRANTY, to the extent permitted by law.
+.SH BUGS
+Please report bugs to https://github.com/maandree/exec-as/issues or to
+maandree@member.fsf.org
