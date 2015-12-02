@@ -83,7 +83,7 @@ exec, you need to use @command{exec} too:
 @node Invoking
 @chapter Invoking
 
-At least two arguments are required. The first
+At least one argument are required. The first
 argument is the file to run. This can either
 be an absolute path, an explicitly relative path,
 or a file in @env{$PATH}. The second argument

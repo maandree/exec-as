@@ -2,7 +2,7 @@ NAME
 	exec-as - exec(1) with explicit argv[0]
 
 SYNOPSIS
-	exec-as FILE ARGV0 [ARGV]...
+	exec-as FILE [ARGV0 [ARGV]...]
 
 DESCRIPTION
 	exec-as shall spawn the program FILE, using execvp(3),
@@ -10,7 +10,7 @@ DESCRIPTION
 	arguments for the following values in argv.
 
 NOTES
-	At least two arguments is required. Since this is not
+	At least one argument is required. Since this is not
 	a builtin function, it cannot be used as exec(1) without
 	arguments to set file descriptors.
 

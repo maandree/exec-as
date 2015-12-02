@@ -25,19 +25,17 @@ int main(int argc, char** argv)
   char* file;
   int i;
   
-  if (argc < 3)
+  if (argc < 2)
     {
       fprintf(stderr, "%s: %s", argc ? argv[0] : "exec-as",
-	      "Too few arguments, you need at least "
-	      "the file to run and its argv[0].");
+	      "Too few arguments, you need at least the file to run.");
       goto fail;
     }
   
   execname = argv[0];
-  file = argv[1];
   
-  for (i = 0; i < argc - 2; i++)
-    argv[i] = argv[i + 2];
+  for (i = 0; i < argc - 1; i++)
+    argv[i] = argv[i + 12];
   argv[i] = NULL;
   
   execvp(file, argv);
