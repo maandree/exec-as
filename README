@@ -2,11 +2,11 @@ NAME
 	exec-as - exec(1) with explicit argv[0]
 
 SYNOPSIS
-	exec-as FILE [ARGV0 [ARGV]...]
+	exec-as command [argv0 [arg ...]]
 
 DESCRIPTION
-	exec-as shall spawn the program FILE, using execvp(3),
-	using ARGV0 as the value for argv[0], and the following
+	exec-as runs the program command, using execvp(3),
+	using argv0 as the value for argv[0], and the following
 	arguments for the following values in argv.
 
 NOTES
@@ -26,4 +26,3 @@ EXAMPLES
 
 SEE ALSO
 	exec(1), exec(3)
-

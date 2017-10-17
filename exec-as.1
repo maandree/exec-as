@@ -1,19 +1,19 @@
 .TH EXEC-AS 1 EXEC-AS
 .SH NAME
-exec-as - passphrase strength evaluator
+exec-as - exec(1) with explicit argv[0]
 .SH SYNOPSIS
 .B exec-as
-.I FILE
-.RI [ ARGV0
-.RI [ ARGV ]...]
+.I command
+.RI [ argv0
+.RI [ arg \ ...]]
 .SH DESCRIPTION
 .B exec-as
-shall spawn the program
-.IR FILE ,
+runs the program
+.IR command ,
 using
 .BR execvp (3),
 using
-.I ARGV0
+.I argv0
 as the value for
 .BR argv[0] ,
 and the following arguments for the following values in
@@ -46,16 +46,5 @@ to
 .BR exec (1),
 .BR exec (3)
 .SH AUTHORS
-Principal author, Mattias Andrée.  See the COPYING file for the full
-list of authors.
-.SH LICENSE
-Copyright \(co 2015  Mattias Andrée
-.br
-License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
-.br
-This is free software: you are free to change and redistribute it.
-.br
-There is NO WARRANTY, to the extent permitted by law.
-.SH BUGS
-Please report bugs to https://github.com/maandree/exec-as/issues or to
-maandree@member.fsf.org
+Mattias Andrée
+.RI < maandree@kth.se >
