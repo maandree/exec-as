@@ -5,8 +5,11 @@ include $(CONFIGFILE)
 
 all: exec-as test
 
-.o:
-	$(CC) -o $@ $^ $(LDFLAGS)
+exec-as: exec-as.o
+	$(CC) -o $@ exec-as.o $(LDFLAGS)
+
+test: test.o
+	$(CC) -o $@ test.o $(LDFLAGS)
 
 .c.o:
 	$(CC) -c -o $@ $< $(CFLAGS) $(CPPFLAGS)
@@ -31,6 +34,7 @@ uninstall:
 clean:
 	-rm -f -- exec-as test
 
-.SUFFIXES: .o .c.o
+.SUFFIXES:
+.SUFFIXES: .o .c
 
 .PHONY: all check install uninstall clean
