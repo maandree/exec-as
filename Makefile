@@ -32,7 +32,7 @@ uninstall:
 	-rm -rf -- "$(DESTDIR)$(PREFIX)/share/licenses/exec-as"
 
 clean:
-	-rm -f -- exec-as test
+	-rm -f -- exec-as test *.o
 
 .SUFFIXES:
 .SUFFIXES: .o .c
