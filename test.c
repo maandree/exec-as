@@ -1,6 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 #include <stdio.h>
 
+
 int
 main(int argc, char *argv[])
 {
