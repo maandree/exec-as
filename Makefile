@@ -13,7 +13,6 @@ all: exec-as test
 	$(CC) -c -o $@ $< $(CFLAGS) $(CPPFLAGS)
 
 check: exec-as test
-	test "$$(./exec-as ./test)"  = ""
 	test "$$(./exec-as ./test 1 2 3)"  = "1,3"
 
 install: exec-as
