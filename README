@@ -11,18 +11,18 @@ DESCRIPTION
 
 NOTES
 	At least one argument is required. Since this is not
-	a builtin function, it cannot be used as exec(1) without
+	a built-in function, it cannot be used as exec(1) without
 	arguments to set file descriptors.
 
-	Because this is not a builtin function, running this
-	program would normally do an fork–exec rather than
+	Because this is not a built-in function, running this
+	program would normally do a fork–exec rather than
 	just an exec. To just perform an exec, you need to
 	use exec(1) too: exec exec-as
 
 EXAMPLES
 	'exec-as bash -bash' will run the first program in
-	$PATH named bash, and set argv[0] to -bash (making it
-	a login shell.) You can add addition argument as needed.
+	$PATH named bash, and set argv[0] to -bash (making it a
+	login shell.) You can add additional arguments as needed.
 
 SEE ALSO
 	exec(1), exec(3)

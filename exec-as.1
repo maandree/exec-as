@@ -20,12 +20,12 @@ and the following arguments for the following values in
 .BR argv .
 .SH NOTES
 At least one argument is required. Since this is not
-a builtin function, it cannot be used as
+a built-in function, it cannot be used as
 .BR exec (1)
 without arguments to set file descriptors.
 .PP
-Because this is not a builtin function, running this
-program would normally do an fork–exec rather than
+Because this is not a built-in function, running this
+program would normally do a fork–exec rather than
 just an exec. To just perform an exec, you need to
 use
 .BR exec (1)
@@ -41,7 +41,7 @@ and set
 .B argv[0]
 to
 .B \-bash
-(making it a login shell.) You can add addition argument as needed.
+(making it a login shell.) You can add additional arguments as needed.
 .SH "SEE ALSO"
 .BR exec (1),
 .BR exec (3)
